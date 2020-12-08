@@ -60,7 +60,7 @@ extern "C" {
 
 /* What is the default curve to use? */
 #ifndef ECC_CURVE
- #define ECC_CURVE NIST_B163
+ #define ECC_CURVE NIST_K233
 #endif
 
 #if defined(ECC_CURVE) && (ECC_CURVE != 0)
@@ -91,15 +91,10 @@ extern "C" {
 
 
 /* NOTE: assumes private is filled with random data before calling */
-int ecdh_generate_keys(uint8_t* public_key, uint8_t* private_key);
+_declspec(dllexport) int ecdh_generate_keys(uint8_t* public_key, uint8_t* private_key);
 
 /* input: own private key + other party's public key, output: shared secret */
-int ecdh_shared_secret(const uint8_t* private_key, const uint8_t* others_pub, uint8_t* output);
-
-
-/* Broken :( .... */
-int ecdsa_sign(const uint8_t* private_key, uint8_t* hash, uint8_t* random_k, uint8_t* signature);
-int ecdsa_verify(const uint8_t* public_key, uint8_t* hash, const uint8_t* signature);
+_declspec(dllexport) int ecdh_shared_secret(const uint8_t* private_key, const uint8_t* others_pub, uint8_t* output);
 
 
 /******************************************************************************/
